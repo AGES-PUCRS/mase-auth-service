@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.pucrs.ages.mase.authservice.dto.AuthRequestDto;
 import br.pucrs.ages.mase.authservice.dto.AuthResponseDto;
+import br.pucrs.ages.mase.authservice.dto.RefreshRequestDto;
 import br.pucrs.ages.mase.authservice.entity.AuthEntity;
 import br.pucrs.ages.mase.authservice.model.Auth;
 import br.pucrs.ages.mase.authservice.repository.AuthRepository;
@@ -40,6 +41,19 @@ public class AuthService {
 				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 			}
 		}).defaultIfEmpty(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+    }
+
+
+    public Mono<ResponseEntity<AuthResponseDto>> refresh(RefreshRequestDto request) {
+        if(jwtUtil.validateToken(request.getRefreshToken())){
+            return authRepository.findOneByEmail(jwtUtil.getEmailFromToken(request.getRefreshToken()))
+            .map(authEntity -> objectMapper.convertValue(authEntity, Auth.class))
+            .map((auth) -> {
+                return ResponseEntity.ok(jwtUtil.generateAuthResponse(auth));
+            }).defaultIfEmpty(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+
+        } else 
+            return Mono.just(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
 
 }

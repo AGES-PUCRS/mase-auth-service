@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.pucrs.ages.mase.authservice.dto.AuthRequestDto;
+import br.pucrs.ages.mase.authservice.dto.RefreshRequestDto;
 import br.pucrs.ages.mase.authservice.service.AuthService;
 import reactor.core.publisher.Mono;
 @RestController
@@ -21,5 +22,11 @@ public class AuthController {
 	public Mono<ResponseEntity<?>> login(@RequestBody AuthRequestDto authRequestDto) {
 		return authService.authenticate(authRequestDto);
 	}
+
+	@RequestMapping(value = "/refresh", method = RequestMethod.POST)
+	public Mono<ResponseEntity<?>> login(@RequestBody RefreshRequestDto refreshRequestDto) {
+		return authService.refresh(refreshRequestDto);
+	}
+
 
 }

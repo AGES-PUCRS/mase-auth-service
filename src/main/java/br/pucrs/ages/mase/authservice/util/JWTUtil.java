@@ -33,7 +33,7 @@ public class JWTUtil implements Serializable {
 				.getBody();
 	}
 
-	public String getUsernameFromToken(String token) {
+	public String getEmailFromToken(String token) {
 		return getAllClaimsFromToken(token).getSubject();
 	}
 
@@ -47,20 +47,20 @@ public class JWTUtil implements Serializable {
 	}
 
 	public AuthResponseDto generateAuthResponse(Auth auth) {
+		Map<String, Object> claims = new HashMap<>();
+		claims.put("role", auth.getRole());
+		return generateAuthResponse(claims, auth.getEmail());
+	}
+
+	private AuthResponseDto generateAuthResponse(Map<String, Object> claims, String email){
 		final Date createdDate = new Date();
 		final Date expirationData = generateExpirationDate(createdDate, false);
 		final Date refreshLife = generateExpirationDate(createdDate, false);
 		return new AuthResponseDto(
-			generateToken(auth, createdDate, expirationData),
-			generateToken(auth, createdDate, refreshLife),
+			doGenerateToken(claims, email, createdDate, expirationData),
+			doGenerateToken(claims, email, createdDate, refreshLife),
 			expirationData.getTime()
 		);
-	}
-
-	private String generateToken(Auth auth, Date createdDate, Date expirationDate ) {
-		Map<String, Object> claims = new HashMap<>();
-		claims.put("role", auth.getRole());
-		return doGenerateToken(claims, auth.getEmail(), createdDate, expirationDate);
 	}
 
 	private Date generateExpirationDate(Date createdDate, boolean isRefreshToken) {
@@ -69,11 +69,11 @@ public class JWTUtil implements Serializable {
 		return expirationDate;
 	}
 
-	private String doGenerateToken(Map<String, Object> claims, String username, Date createdDate, Date expirationDate) {
+	private String doGenerateToken(Map<String, Object> claims, String email, Date createdDate, Date expirationDate) {
 		
 		return Jwts.builder()
 				.setClaims(claims)
-				.setSubject(username)
+				.setSubject(email)
 				.setIssuedAt(createdDate)
 				.setExpiration(expirationDate)
 				.signWith(SignatureAlgorithm.HS512, Base64.getEncoder().encodeToString(secret.getBytes()))
