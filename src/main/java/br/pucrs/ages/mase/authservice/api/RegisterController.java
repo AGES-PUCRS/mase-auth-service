@@ -23,6 +23,9 @@ import br.pucrs.ages.mase.authservice.entity.AuthEntity;
 import br.pucrs.ages.mase.authservice.model.Auth;
 import br.pucrs.ages.mase.authservice.service.AuthService;
 import br.pucrs.ages.mase.authservice.service.RegisterService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.ApiResponse;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
@@ -32,10 +35,12 @@ public class RegisterController {
     @Autowired
     private RegisterService registerService;
 
+    @ApiOperation(value = "API para registrar usuário", notes = "Faz a inclusão de um voluntário no usuário.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Inclusão de voluntário realizada com sucesso", response = Void.class), })
     @PostMapping("/register")
     public Mono<ResponseEntity<Object>> register(@Valid @RequestBody RegisterRequestDto registerRequestDto) {
-        return registerService.insert(registerRequestDto)
-        .map(auth -> {
+        return registerService.insert(registerRequestDto).map(auth -> {
             return ResponseEntity.status(HttpStatus.CREATED).build();
         });
     }
