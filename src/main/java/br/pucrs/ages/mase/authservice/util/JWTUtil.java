@@ -49,18 +49,16 @@ public class JWTUtil implements Serializable {
 	public AuthResponseDto generateAuthResponse(Auth auth) {
 		Map<String, Object> claims = new HashMap<>();
 		claims.put("role", auth.getRole());
+		claims.put("userId", auth.getUserId());
 		return generateAuthResponse(claims, auth.getEmail());
 	}
 
-	private AuthResponseDto generateAuthResponse(Map<String, Object> claims, String email){
+	private AuthResponseDto generateAuthResponse(Map<String, Object> claims, String email) {
 		final Date createdDate = new Date();
 		final Date expirationData = generateExpirationDate(createdDate, false);
 		final Date refreshLife = generateExpirationDate(createdDate, false);
-		return new AuthResponseDto(
-			doGenerateToken(claims, email, createdDate, expirationData),
-			doGenerateToken(claims, email, createdDate, refreshLife),
-			expirationData.getTime()
-		);
+		return new AuthResponseDto(doGenerateToken(claims, email, createdDate, expirationData),
+				doGenerateToken(claims, email, createdDate, refreshLife), expirationData.getTime());
 	}
 
 	private Date generateExpirationDate(Date createdDate, boolean isRefreshToken) {
@@ -70,14 +68,9 @@ public class JWTUtil implements Serializable {
 	}
 
 	private String doGenerateToken(Map<String, Object> claims, String email, Date createdDate, Date expirationDate) {
-		
-		return Jwts.builder()
-				.setClaims(claims)
-				.setSubject(email)
-				.setIssuedAt(createdDate)
-				.setExpiration(expirationDate)
-				.signWith(SignatureAlgorithm.HS512, Base64.getEncoder().encodeToString(secret.getBytes()))
-				.compact();
+
+		return Jwts.builder().setClaims(claims).setSubject(email).setIssuedAt(createdDate).setExpiration(expirationDate)
+				.signWith(SignatureAlgorithm.HS512, Base64.getEncoder().encodeToString(secret.getBytes())).compact();
 	}
 
 	public Boolean validateToken(String token) {
