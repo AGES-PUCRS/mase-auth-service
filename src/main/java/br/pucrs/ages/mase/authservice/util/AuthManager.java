@@ -20,15 +20,15 @@ public class AuthManager implements ReactiveAuthenticationManager {
 
 	@Autowired
 	private JWTUtil jwtUtil;
-	
+
 	@Override
 	@SuppressWarnings("unchecked")
 	public Mono<Authentication> authenticate(Authentication authentication) {
 		String authToken = authentication.getCredentials().toString();
-		
+
 		String username;
 		try {
-			username = jwtUtil.getUsernameFromToken(authToken);
+			username = jwtUtil.getEmailFromToken(authToken);
 		} catch (Exception e) {
 			username = null;
 		}
@@ -39,11 +39,9 @@ public class AuthManager implements ReactiveAuthenticationManager {
 			for (String rolemap : rolesMap) {
 				roles.add(Role.valueOf(rolemap));
 			}
-			UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
-				username,
-				null,
-				roles.stream().map(authority -> new SimpleGrantedAuthority(authority.name())).collect(Collectors.toList())
-			);
+			UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(username, null,
+					roles.stream().map(authority -> new SimpleGrantedAuthority(authority.name()))
+							.collect(Collectors.toList()));
 			return Mono.just(auth);
 		} else {
 			return Mono.empty();
