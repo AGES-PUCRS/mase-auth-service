@@ -4,19 +4,26 @@ package br.pucrs.ages.mase.authservice.dto;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.bson.types.ObjectId;
+import org.hibernate.validator.constraints.Length;
 
 import br.pucrs.ages.mase.authservice.model.Role;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 public class RegisterRequestDto {
 
     @NotEmpty
     private ObjectId userId;
+
     @NotEmpty
+    @Length(min = 6, max = 64)
     private String password;
+
     @NotEmpty
+    @Email
     private String email;
+
     @NotEmpty
     private Role role;
 
