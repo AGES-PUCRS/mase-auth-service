@@ -5,6 +5,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.bson.types.ObjectId;
 
+import br.pucrs.ages.mase.authservice.model.Role;
+
 import javax.validation.constraints.NotEmpty;
 
 public class RegisterRequestDto {
@@ -16,8 +18,7 @@ public class RegisterRequestDto {
     @NotEmpty
     private String email;
     @NotEmpty
-    private String role;
-
+    private Role role;
 
     public String getPassword() {
         return password;
@@ -57,14 +58,14 @@ public class RegisterRequestDto {
     /**
      * @return the role
      */
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
     /**
      * @param role the role to set
      */
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 }

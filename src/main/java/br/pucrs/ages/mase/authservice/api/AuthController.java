@@ -39,7 +39,7 @@ public class AuthController {
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Token refrescado com sucesso", response = AuthResponseDto.class), })
 	@RequestMapping(value = "/refresh", method = RequestMethod.POST)
-	public Mono<?> login(@Valid @RequestBody RefreshRequestDto refreshRequestDto) {
+	public Mono<?> refresh(@Valid @RequestBody RefreshRequestDto refreshRequestDto) {
 		return authService.refresh(refreshRequestDto).map((auth) -> ResponseEntity.ok(auth))
 				.defaultIfEmpty(ResponseEntity.status(HttpStatus.NOT_FOUND).build())
 				.onErrorReturn(RuntimeException.class, ResponseEntity.status(HttpStatus.NOT_FOUND).build());
