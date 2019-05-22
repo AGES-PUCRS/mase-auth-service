@@ -24,16 +24,11 @@ public class RegisterService {
     @Autowired
     private PWDEncoder passwordEncoder;
 
-    @Autowired
-    private JWTUtil jwtUtil;
-    
     public Mono<Auth> insert(RegisterRequestDto request) {
         request.setPassword(passwordEncoder.encode(request.getPassword()));
-
         return authRepository.save(objectMapper.convertValue(request, AuthEntity.class))
                 .subscribeOn(Schedulers.elastic())
-                .map(authRepository -> objectMapper.convertValue(authRepository, Auth.class))             
-                .doOnError(exception -> {
+                .map(authRepository -> objectMapper.convertValue(authRepository, Auth.class)).doOnError(exception -> {
                     throw new RuntimeException(exception);
                 });
     }

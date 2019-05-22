@@ -29,16 +29,20 @@ public class AuthController {
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Autenticação de usuário realizada com sucesso", response = AuthResponseDto.class), })
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public Mono<ResponseEntity<?>> login(@Valid @RequestBody AuthRequestDto authRequestDto) {
-		return authService.authenticate(authRequestDto);
+	public Mono<?> login(@Valid @RequestBody AuthRequestDto authRequestDto) {
+		return authService.authenticate(authRequestDto).map((auth) -> ResponseEntity.ok(auth))
+				.defaultIfEmpty(ResponseEntity.status(HttpStatus.NOT_FOUND).build())
+				.onErrorReturn(RuntimeException.class, ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 
 	@ApiOperation(value = "API para refrescar token usuário", notes = "Faz a refresca token de um usuário")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Token refrescado com sucesso", response = AuthResponseDto.class), })
 	@RequestMapping(value = "/refresh", method = RequestMethod.POST)
-	public Mono<ResponseEntity<AuthResponseDto>> login(@Valid @RequestBody RefreshRequestDto refreshRequestDto) {
-		return authService.refresh(refreshRequestDto);
+	public Mono<?> login(@Valid @RequestBody RefreshRequestDto refreshRequestDto) {
+		return authService.refresh(refreshRequestDto).map((auth) -> ResponseEntity.ok(auth))
+				.defaultIfEmpty(ResponseEntity.status(HttpStatus.NOT_FOUND).build())
+				.onErrorReturn(RuntimeException.class, ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 
 }

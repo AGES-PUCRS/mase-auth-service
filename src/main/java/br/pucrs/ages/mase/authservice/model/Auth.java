@@ -1,12 +1,9 @@
 package br.pucrs.ages.mase.authservice.model;
 
 import org.bson.types.ObjectId;
-import org.hibernate.validator.constraints.UniqueElements;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 public class Auth {
-    
+
     private ObjectId id;
     private ObjectId userId;
     private String email;
@@ -53,4 +50,3 @@ public class Auth {
         this.role = role;
     }
 }
-

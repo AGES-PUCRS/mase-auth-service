@@ -3,7 +3,6 @@ package br.pucrs.ages.mase.authservice.dto;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.bson.types.ObjectId;
 
 import javax.validation.constraints.NotEmpty;
 
