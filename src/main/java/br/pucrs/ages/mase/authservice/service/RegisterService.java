@@ -4,7 +4,6 @@ import br.pucrs.ages.mase.authservice.dto.RegisterRequestDto;
 import br.pucrs.ages.mase.authservice.entity.AuthEntity;
 import br.pucrs.ages.mase.authservice.model.Auth;
 import br.pucrs.ages.mase.authservice.repository.AuthRepository;
-import br.pucrs.ages.mase.authservice.util.JWTUtil;
 import br.pucrs.ages.mase.authservice.util.PWDEncoder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
