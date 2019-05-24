@@ -1,6 +1,5 @@
 package br.pucrs.ages.mase.authservice.util;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
@@ -10,9 +9,6 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 @EnableWebFluxSecurity
 @EnableReactiveMethodSecurity
 public class WebSecurityConfig {
-
-	@Autowired
-	private AuthManager authenticationManager;
 
 	@Bean
 	public SecurityWebFilterChain securitygWebFilterChain(ServerHttpSecurity http) {
