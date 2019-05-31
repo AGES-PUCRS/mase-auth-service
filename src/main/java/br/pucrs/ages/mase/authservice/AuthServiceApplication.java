@@ -9,7 +9,7 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 public class AuthServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AuthServiceApplication.class, args);
+		// SpringApplication.run(AuthServiceApplication.class, args);
 	}
 
 }

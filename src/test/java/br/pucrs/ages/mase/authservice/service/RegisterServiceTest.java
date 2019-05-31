@@ -1,7 +1,6 @@
 package br.pucrs.ages.mase.authservice.service;
 
 import br.pucrs.ages.mase.authservice.dto.RegisterRequestDto;
-import br.pucrs.ages.mase.authservice.entity.AuthEntity;
 import br.pucrs.ages.mase.authservice.model.Auth;
 import br.pucrs.ages.mase.authservice.repository.AuthRepository;
 import br.pucrs.ages.mase.authservice.service.RegisterService;
@@ -29,9 +28,6 @@ public class RegisterServiceTest {
     private RegisterService registerService;
 
     private AuthRepository authRepository;
-
-    @Autowired(required = true)
-    private ObjectMapper objectMapper;
 
     public RegisterServiceTest() {
         authRepository = mock(AuthRepository.class);
