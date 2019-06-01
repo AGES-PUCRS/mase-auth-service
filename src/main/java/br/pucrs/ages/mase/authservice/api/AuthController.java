@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import br.pucrs.ages.mase.authservice.dto.AuthRequestDto;
 import br.pucrs.ages.mase.authservice.dto.AuthResponseDto;
@@ -30,9 +31,9 @@ public class AuthController {
 			@ApiResponse(code = 200, message = "Autenticação de usuário realizada com sucesso", response = AuthResponseDto.class), })
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public Mono<?> login(@Valid @RequestBody AuthRequestDto authRequestDto) {
-		return authService.authenticate(authRequestDto).map((auth) -> ResponseEntity.ok(auth))
-				.defaultIfEmpty(ResponseEntity.status(HttpStatus.NOT_FOUND).build())
-				.onErrorReturn(RuntimeException.class, ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+		return authService.authenticate(authRequestDto).doOnError(Exception.class, throwable -> {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		});
 	}
 
 	@ApiOperation(value = "API para refrescar token usuário", notes = "Faz a refresca token de um usuário")
@@ -40,9 +41,9 @@ public class AuthController {
 			@ApiResponse(code = 200, message = "Token refrescado com sucesso", response = AuthResponseDto.class), })
 	@RequestMapping(value = "/refresh", method = RequestMethod.POST)
 	public Mono<?> refresh(@Valid @RequestBody RefreshRequestDto refreshRequestDto) {
-		return authService.refresh(refreshRequestDto).map((auth) -> ResponseEntity.ok(auth))
-				.defaultIfEmpty(ResponseEntity.status(HttpStatus.NOT_FOUND).build())
-				.onErrorReturn(RuntimeException.class, ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+		return authService.refresh(refreshRequestDto).doOnError(Exception.class, throwable -> {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		});
 	}
 
 }
