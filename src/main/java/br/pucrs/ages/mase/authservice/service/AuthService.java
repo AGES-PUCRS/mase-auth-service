@@ -37,7 +37,7 @@ public class AuthService {
                     } else {
                         throw new UnauthorizedException("User name or Password Incorrect");
                     }
-                });
+                }).switchIfEmpty(Mono.error(new UnauthorizedException("User name or Password Incorrect")));
     }
 
     public Mono<?> refresh(RefreshRequestDto request) {

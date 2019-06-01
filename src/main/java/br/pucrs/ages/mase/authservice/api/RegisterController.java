@@ -24,12 +24,12 @@ public class RegisterController {
 
     @ApiOperation(value = "API para registrar usuário", notes = "Faz a inclusão de um voluntário no usuário.")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Inclusão de voluntário realizada com sucesso", response = Void.class), })
+            @ApiResponse(code = 201, message = "Inclusão de voluntário realizada com sucesso", response = Void.class),})
     @PostMapping("/register")
     public Mono<ResponseEntity<Object>> register(@Valid @RequestBody RegisterRequestDto registerRequestDto) {
-        return registerService.insert(registerRequestDto).map(auth -> {
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        }).onErrorReturn(Exception.class, ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+        return registerService.insert(registerRequestDto)
+                .map(auth -> ResponseEntity.status(HttpStatus.CREATED).build())
+                .onErrorReturn(Exception.class, ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
 
 }

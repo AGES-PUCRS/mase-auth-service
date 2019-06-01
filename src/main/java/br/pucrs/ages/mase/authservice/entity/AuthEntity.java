@@ -21,7 +21,7 @@ public class AuthEntity {
     private String password;
 
     @Field
-    private Role role = Role.ROLE_USER;
+    private Role role = Role.USER;
 
     @Field
     private boolean deleted = false;
