@@ -44,16 +44,10 @@ public class RegisterRequestDto {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
     }
 
-    /**
-     * @return the role
-     */
     public Role getRole() {
         return role;
     }
 
-    /**
-     * @param role the role to set
-     */
     public void setRole(Role role) {
         this.role = role;
     }

@@ -12,10 +12,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-/**
- *
- * @author ard333
- */
 @Component
 public class SecurityContextRepository implements ServerSecurityContextRepository {
 
