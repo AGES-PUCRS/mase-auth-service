@@ -32,8 +32,10 @@ public class AuthController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public Mono<?> login(@Valid @RequestBody AuthRequestDto authRequestDto) {
 		return authService.authenticate(authRequestDto).doOnError(Exception.class, throwable -> {
+			System.out.println("ERROR");
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		});
+
 	}
 
 	@ApiOperation(value = "API para refrescar token usuário", notes = "Faz a refresca token de um usuário")

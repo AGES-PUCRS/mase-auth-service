@@ -1,6 +1,8 @@
 
 package br.pucrs.ages.mase.authservice.dto;
 
+import br.pucrs.ages.mase.authservice.model.Role;
+
 public class AuthResponseDto {
 
 	private String token;
@@ -9,10 +11,13 @@ public class AuthResponseDto {
 
 	private Long expires;
 
-	public AuthResponseDto(String token, String refreshToken, Long expires) {
+	private Role role;
+
+	public AuthResponseDto(String token, String refreshToken, Long expires, Role role) {
 		this.token = token;
 		this.refreshToken = refreshToken;
 		this.expires = expires;
+		this.role = role;
 	}
 
 	public AuthResponseDto() {
@@ -40,5 +45,13 @@ public class AuthResponseDto {
 
 	public void setExpires(Long expires) {
 		this.expires = expires;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 }

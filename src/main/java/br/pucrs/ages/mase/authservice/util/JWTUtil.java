@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import br.pucrs.ages.mase.authservice.dto.AuthResponseDto;
 import br.pucrs.ages.mase.authservice.model.Auth;
+import br.pucrs.ages.mase.authservice.model.Role;
 
 @Component
 public class JWTUtil implements Serializable {
@@ -50,15 +51,15 @@ public class JWTUtil implements Serializable {
 		Map<String, Object> claims = new HashMap<>();
 		claims.put("role", auth.getRole());
 		claims.put("email", auth.getEmail());
-		return generateAuthResponse(claims, auth.getEmail());
+		return generateAuthResponse(claims, auth.getEmail(), auth.getRole());
 	}
 
-	private AuthResponseDto generateAuthResponse(Map<String, Object> claims, String email) {
+	private AuthResponseDto generateAuthResponse(Map<String, Object> claims, String email, Role role) {
 		final Date createdDate = new Date();
 		final Date expirationData = generateExpirationDate(createdDate, false);
 		final Date refreshLife = generateExpirationDate(createdDate, false);
 		return new AuthResponseDto(doGenerateToken(claims, email, createdDate, expirationData),
-				doGenerateToken(claims, email, createdDate, refreshLife), expirationData.getTime());
+				doGenerateToken(claims, email, createdDate, refreshLife), expirationData.getTime(), role);
 	}
 
 	private Date generateExpirationDate(Date createdDate, boolean isRefreshToken) {
