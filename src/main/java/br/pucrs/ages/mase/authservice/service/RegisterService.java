@@ -28,6 +28,7 @@ public class RegisterService {
         return authRepository.save(objectMapper.convertValue(request, AuthEntity.class))
                 .subscribeOn(Schedulers.elastic())
                 .map(authRepository -> objectMapper.convertValue(authRepository, Auth.class)).doOnError(exception -> {
+                    System.out.println(exception);
                     throw new RuntimeException(exception);
                 });
     }

@@ -35,7 +35,7 @@ public class AuthService {
                     if (passwordEncoder.encode(request.getPassword()).equals(auth.getPassword())) {
                         return jwtUtil.generateAuthResponse(auth);
                     } else {
-                        return Mono.error(new UnauthorizedException("User name or Password Incorrect"));
+                        throw new UnauthorizedException("User name or Password Incorrect");
                     }
                 });
     }
@@ -47,7 +47,7 @@ public class AuthService {
                         return jwtUtil.generateAuthResponse(auth);
                     });
         } else
-            return Mono.error(new UnauthorizedException("User name or Password Incorrect"));
+            throw new UnauthorizedException("User name or Password Incorrect");
     }
 
 }

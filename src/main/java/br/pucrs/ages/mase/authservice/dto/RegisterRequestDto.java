@@ -3,7 +3,6 @@ package br.pucrs.ages.mase.authservice.dto;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.bson.types.ObjectId;
 import org.hibernate.validator.constraints.Length;
 
 import br.pucrs.ages.mase.authservice.model.Role;
@@ -12,9 +11,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 public class RegisterRequestDto {
-
-    @NotEmpty
-    private ObjectId userId;
 
     @NotEmpty
     @Length(min = 6, max = 64)
@@ -46,20 +42,6 @@ public class RegisterRequestDto {
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
-    }
-
-    /**
-     * @return the userId
-     */
-    public ObjectId getUserId() {
-        return userId;
-    }
-
-    /**
-     * @param userId the userId to set
-     */
-    public void setUserId(ObjectId userId) {
-        this.userId = userId;
     }
 
     /**

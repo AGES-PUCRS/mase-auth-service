@@ -11,6 +11,4 @@ public interface AuthRepository extends ReactiveMongoRepository<AuthEntity, Obje
 
     public Mono<AuthEntity> findOneByEmail(String email);
 
-    public Mono<AuthEntity> findOneByUserId(ObjectId userId);
-
 }

@@ -5,7 +5,6 @@ import org.bson.types.ObjectId;
 public class Auth {
 
     private ObjectId id;
-    private ObjectId userId;
     private String email;
     private String password;
     private Role role;
@@ -20,14 +19,6 @@ public class Auth {
 
     public String getPassword() {
         return password;
-    }
-
-    public ObjectId getUserId() {
-        return userId;
-    }
-
-    public void setUserId(ObjectId userId) {
-        this.userId = userId;
     }
 
     public String getEmail() {

@@ -15,19 +15,17 @@ public class AuthEntity {
     @Id
     private ObjectId id;
 
-    @Indexed(unique=true)
-    private ObjectId userId;
-    @Indexed(unique=true)
+    @Indexed(unique = true)
     private String email;
 
     private String password;
-    
+
     @Field
     private Role role = Role.ROLE_USER;
 
     @Field
     private boolean deleted = false;
-   
+
     public ObjectId getId() {
         return id;
     }
@@ -38,14 +36,6 @@ public class AuthEntity {
 
     public String getPassword() {
         return password;
-    }
-
-    public ObjectId getUserId() {
-        return userId;
-    }
-
-    public void setUserId(ObjectId userId) {
-        this.userId = userId;
     }
 
     public String getEmail() {
@@ -68,4 +58,3 @@ public class AuthEntity {
         this.role = role;
     }
 }
-

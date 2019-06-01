@@ -49,7 +49,7 @@ public class JWTUtil implements Serializable {
 	public AuthResponseDto generateAuthResponse(Auth auth) {
 		Map<String, Object> claims = new HashMap<>();
 		claims.put("role", auth.getRole());
-		claims.put("userId", auth.getUserId());
+		claims.put("email", auth.getEmail());
 		return generateAuthResponse(claims, auth.getEmail());
 	}
 
