@@ -17,6 +17,7 @@ import br.pucrs.ages.mase.authservice.service.AuthService;
 import reactor.core.publisher.Mono;
 
 @RestController
+@RequestMapping("/v1")
 public class AuthController {
 
 	@Autowired
@@ -25,7 +26,6 @@ public class AuthController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public Mono<?> login(@Valid @RequestBody AuthRequestDto authRequestDto) {
 		return authService.authenticate(authRequestDto).doOnError(UnauthorizedException.class, throwable -> {
-			System.out.println("ERROR");
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		});
 

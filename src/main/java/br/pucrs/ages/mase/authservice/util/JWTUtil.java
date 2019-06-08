@@ -42,6 +42,10 @@ public class JWTUtil implements Serializable {
 		return getAllClaimsFromToken(token).getExpiration();
 	}
 
+	public Role getRoleFromToken(String token) {
+		return getAllClaimsFromToken(token).get("role", Role.class);
+	}
+
 	private Boolean isTokenExpired(String token) {
 		final Date expiration = getExpirationDateFromToken(token);
 		return expiration.before(new Date());

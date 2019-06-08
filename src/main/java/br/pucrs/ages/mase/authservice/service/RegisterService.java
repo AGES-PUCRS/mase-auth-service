@@ -33,5 +33,4 @@ public class RegisterService {
                     throw new UnauthorizedException(exception);
                 });
     }
-
 }

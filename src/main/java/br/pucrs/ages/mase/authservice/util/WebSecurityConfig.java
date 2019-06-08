@@ -33,9 +33,9 @@ public class WebSecurityConfig {
 			});
 		}).and().csrf().disable().formLogin().disable().httpBasic().disable().authenticationManager(authManager)
 				.securityContextRepository(securityContextRepository).authorizeExchange()
-				.pathMatchers(HttpMethod.OPTIONS).permitAll().pathMatchers("/login").permitAll()
-				.pathMatchers("/refresh").permitAll().pathMatchers("/register").permitAll().anyExchange()
-				.authenticated().and().build();
+				.pathMatchers(HttpMethod.OPTIONS).permitAll().pathMatchers("/v1/login").permitAll()
+				.pathMatchers("/v1/refresh").permitAll().pathMatchers("/v1/register").permitAll()
+				.pathMatchers("/v1/role").permitAll().anyExchange().authenticated().and().build();
 
 	}
 }

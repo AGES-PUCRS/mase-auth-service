@@ -1,8 +1,8 @@
 package br.pucrs.ages.mase.authservice.service;
 
 import br.pucrs.ages.mase.authservice.dto.RegisterRequestDto;
-import br.pucrs.ages.mase.authservice.entity.AuthEntity;
 import br.pucrs.ages.mase.authservice.model.Auth;
+import br.pucrs.ages.mase.authservice.model.Role;
 import br.pucrs.ages.mase.authservice.repository.AuthRepository;
 import br.pucrs.ages.mase.authservice.service.RegisterService;
 
@@ -40,6 +40,7 @@ public class RegisterServiceTest {
     @Test
     public void shouldInsertCivilDefenseInstitution() {
         RegisterRequestDto requestDto = EnhancedRandom.random(RegisterRequestDto.class);
+        requestDto.setRole(Role.USER);
         when(authRepository.save(any())).thenAnswer(response -> Mono.just(response.getArgument(0)));
         StepVerifier.create(registerService.insert(requestDto)).assertNext(response -> {
             assertEquals(Auth.class, response.getClass());
