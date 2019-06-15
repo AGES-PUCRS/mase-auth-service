@@ -1,5 +1,9 @@
 package br.pucrs.ages.mase.authservice.entity;
 
+import javax.validation.constraints.NotBlank;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.bson.types.ObjectId;
 
 import org.springframework.data.annotation.Id;
@@ -18,10 +22,11 @@ public class AuthEntity {
     @Indexed(unique = true)
     private String email;
 
+    @NotBlank
     private String password;
 
     @Field
-    private Role role = Role.ROLE_USER;
+    private Role role;
 
     @Field
     private boolean deleted = false;
@@ -56,5 +61,10 @@ public class AuthEntity {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
     }
 }

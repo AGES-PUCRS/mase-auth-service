@@ -9,6 +9,7 @@ import br.pucrs.ages.mase.authservice.model.Role;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class RegisterRequestDto {
 
@@ -20,7 +21,6 @@ public class RegisterRequestDto {
     @Email
     private String email;
 
-    @NotEmpty
     private Role role;
 
     public String getPassword() {
@@ -39,10 +39,6 @@ public class RegisterRequestDto {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
-    }
 
     public Role getRole() {
         return role;
@@ -50,5 +46,10 @@ public class RegisterRequestDto {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
     }
 }

@@ -4,7 +4,11 @@ public class UnauthorizedException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-    public UnauthorizedException(String error) {
-        super(error);
+    public UnauthorizedException(Throwable exception) {
+        super(exception);
+    }
+
+    public UnauthorizedException(String exception) {
+        super(exception);
     }
 }

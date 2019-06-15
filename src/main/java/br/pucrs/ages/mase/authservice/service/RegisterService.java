@@ -2,6 +2,7 @@ package br.pucrs.ages.mase.authservice.service;
 
 import br.pucrs.ages.mase.authservice.dto.RegisterRequestDto;
 import br.pucrs.ages.mase.authservice.entity.AuthEntity;
+import br.pucrs.ages.mase.authservice.exception.UnauthorizedException;
 import br.pucrs.ages.mase.authservice.model.Auth;
 import br.pucrs.ages.mase.authservice.repository.AuthRepository;
 import br.pucrs.ages.mase.authservice.util.PWDEncoder;
@@ -29,8 +30,7 @@ public class RegisterService {
                 .subscribeOn(Schedulers.elastic())
                 .map(authRepository -> objectMapper.convertValue(authRepository, Auth.class)).doOnError(exception -> {
                     System.out.println(exception);
-                    throw new RuntimeException(exception);
+                    throw new UnauthorizedException(exception);
                 });
     }
-
 }
