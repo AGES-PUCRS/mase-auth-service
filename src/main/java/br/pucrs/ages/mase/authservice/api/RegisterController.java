@@ -26,7 +26,7 @@ public class RegisterController {
 
         @RequestMapping(value = "/register", method = RequestMethod.POST)
         public Mono<ResponseEntity<Object>> register(@Valid @RequestBody RegisterRequestDto registerRequestDto) {
-                if (registerRequestDto.getRole().equals(Role.CIVIL_DEFENSE)
+                if (registerRequestDto.getRole().equals(Role.CIVILDEFENSE)
                                 || registerRequestDto.getRole().equals(Role.ADMIN)) {
                         throw new UnauthorizedException("Não autorizado para criar um " + registerRequestDto.getRole());
                 }
@@ -34,10 +34,10 @@ public class RegisterController {
         }
 
         @RequestMapping(value = "/register/civildefense", method = RequestMethod.POST)
-        @PreAuthorize("hasAnyRole('ADMIN', 'CIVIL_DEFENSE')")
+        @PreAuthorize("hasAnyRole('ADMIN', 'CIVILDEFENSE')")
         public Mono<ResponseEntity<Object>> registerCivilDefense(
                         @Valid @RequestBody RegisterRequestDto registerRequestDto) {
-                registerRequestDto.setRole(Role.CIVIL_DEFENSE);
+                registerRequestDto.setRole(Role.CIVILDEFENSE);
                 return this.insertStrategy(registerRequestDto);
         }
 
