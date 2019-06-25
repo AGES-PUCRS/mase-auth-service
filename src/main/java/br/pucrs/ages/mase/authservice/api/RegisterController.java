@@ -34,7 +34,6 @@ public class RegisterController {
         }
 
         @RequestMapping(value = "/register/civildefense", method = RequestMethod.POST)
-        @PreAuthorize("hasAnyRole('ADMIN', 'CIVILDEFENSE')")
         public Mono<ResponseEntity<Object>> registerCivilDefense(
                         @Valid @RequestBody RegisterRequestDto registerRequestDto) {
                 registerRequestDto.setRole(Role.CIVILDEFENSE);
