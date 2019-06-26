@@ -35,6 +35,7 @@ public class WebSecurityConfig {
 				.securityContextRepository(securityContextRepository).authorizeExchange()
 				.pathMatchers(HttpMethod.OPTIONS).permitAll().pathMatchers("/v1/login").permitAll()
 				.pathMatchers("/v1/refresh").permitAll().pathMatchers("/v1/register").permitAll()
+				.pathMatchers("v1/register/civildefense").permitAll()
 				.pathMatchers("/v1/role").permitAll().anyExchange().authenticated().and().build();
 
 	}
