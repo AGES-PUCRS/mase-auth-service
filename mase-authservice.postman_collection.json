@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "af7ee0eb-5543-4de4-8dc3-17ebe04450f0",
+		"name": "mase-authservice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "127.0.0.1:8081/register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userId\": \"5ce5b6c838d484b59cae62e2\",\n\t\"password\" : \"senha123\",\n\t\"email\"  : \"a@hotmail.com\",\n\t\"role\" : \"ROLE_USER\"\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:8081/register",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:8081/login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"a@hotmail.com\",\n\t\"password\":\"senha123\"\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:8081/login",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:8081/refresh",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"refreshToken\" : \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhQGhvdG1haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTU1ODY4NzU3NywidXNlcklkIjp7InRpbWVzdGFtcCI6MTU1ODU1ODQwOCwibWFjaGluZUlkZW50aWZpZXIiOjM3MjQ0MjAsInByb2Nlc3NJZGVudGlmaWVyIjotMTkwNDQsImNvdW50ZXIiOjExNDI4NTc4LCJkYXRlIjoxNTU4NTU4NDA4MDAwLCJ0aW1lIjoxNTU4NTU4NDA4MDAwLCJ0aW1lU2Vjb25kIjoxNTU4NTU4NDA4fSwiaWF0IjoxNTU4NTU4Nzc3fQ.VR0UfBNh5YhebudI37OaQJJR-tWWmVhTfA_hybQu1Mns9YEXbuTYXDsMWTxVIWq_jKyOgI6FBqXUzOYkBeVRxw\"\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:8081/refresh",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
